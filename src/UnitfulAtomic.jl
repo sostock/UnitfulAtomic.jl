@@ -1,0 +1,147 @@
+module UnitfulAtomic
+
+import Unitful
+using Unitful: @unit, Dimension, Dimensions, NoDims, NoUnits, Quantity, Units, dimension, uconvert, ustrip
+
+export auconvert, aunit, austrip
+
+# The following five constants are used as the “base” atomic units
+@unit mₑ  "mₑ"  ElectronRestMass      Unitful.me                    false
+@unit e   "e"   ElementaryCharge      Unitful.q                     false
+@unit ħ   "ħ"   ReducedPlanckConstant Unitful.ħ                     false
+@unit k   "k"   BoltzmannConstant     Unitful.k                     false
+@unit a₀  "a₀"  BohrRadius            5.29_177_210_67e-11*Unitful.m false
+
+# Hartree energy is derived from the base atomic units
+@unit Eₕ  "Eₕ"  HartreeEnergy         1ħ^2/(mₑ*a₀^2)                false
+
+# Units that are not Hartree atomic units, but are commonly used in atomic physics
+@unit Ry  "Ry"  RydbergEnergy         Eₕ//2                         false
+@unit μ_N "μ_N" NuclearMagneton       e*ħ/(2*Unitful.mp)            false
+
+# Aliases for units
+const bohr    = a₀
+const hartree = Eₕ
+
+"""
+    aunit(x::Unitful.Quantity)
+    aunit(x::Unitful.Units)
+    aunit(x::Unitful.Dimensions)
+
+Returns the appropriate atomic unit (a `Unitful.Units` object) for the dimension of `x`.
+
+# Examples
+
+```jldoctest
+julia> aunit(2.3u"cm")
+a₀
+
+julia> aunit(u"T")
+a₀^-2 e^-1 ħ
+```
+"""
+aunit(x) = aunit(dimension(x))
+
+# `aunit` for `Dimension` types
+aunit(x::Dimension{:Length})      = (a₀)^x.power
+aunit(x::Dimension{:Mass})        = (mₑ)^x.power
+aunit(x::Dimension{:Time})        = (ħ/Eₕ)^x.power
+aunit(x::Dimension{:Current})     = (e*Eₕ/ħ)^x.power
+aunit(x::Dimension{:Temperature}) = (Eₕ/k)^x.power
+
+# For dimensions not specified above, there is no atomic unit.
+aunit(::Dimension{D}) where D = throw(ArgumentError("no atomic unit defined for dimension $D."))
+
+# `aunit` for `Dimensions` types
+@generated aunit(::Dimensions{N}) where N = prod(aunit, N)
+aunit(::typeof(NoDims)) = NoUnits
+
+# Simplifications for some derived dimensions, so that e.g. `aunit(u"J")` returns `Eₕ`
+# instead of `a₀^2 mₑ Eₕ^2 ħ^-2`. The following units/dimensions are considered:
+#   * Energy: Eₕ
+#   * Momentum: ħ/a₀
+#   * Action/angular momentum: ħ
+#   * Force: Eₕ/a₀
+#   * Pressure: Eₕ/a₀^3
+#   * E-field: Eₕ/(e*a₀)
+#   * B-field: ħ/(e*a₀^2)
+#   * Voltage/electric potential: Eₕ/e
+#   * Magnetic dipole moment: e*ħ/mₑ
+for unit in (:(Eₕ), :(ħ/a₀), :(ħ), :(Eₕ/a₀), :(Eₕ/a₀^3), :(Eₕ/(e*a₀)), :(ħ/(e*a₀^2)), :(Eₕ/e), :(e*ħ/mₑ))
+    @eval aunit(::typeof(dimension($unit))) = $unit
+end
+
+"""
+    auconvert(x::Unitful.Quantity)
+
+Convert a quantity to the appropriate atomic unit.
+
+# Examples
+
+```jldoctest
+julia> auconvert(13.6u"eV")
+0.4997907858599377 Eₕ
+
+julia> auconvert(20u"nm")
+377.94522509156565 a₀
+```
+"""
+auconvert(x::Quantity) = uconvert(aunit(x), x)
+
+"""
+    auconvert(u::Unitful.Units, x::Number)
+
+Interpret `x` as a quantity given in atomic units and convert it to the unit `u`.
+
+# Examples
+
+```jldoctest
+julia> auconvert(u"eV", 1)  # convert 1 Eₕ to eV
+27.211386013449417 eV
+
+julia> auconvert(u"m", 1)   # convert 1 a₀ to m
+5.2917721067e-11 m
+```
+"""
+auconvert(u::Units, x::Number) = uconvert(u, x*aunit(u))
+
+"""
+    austrip(x::Unitful.Quantity)
+
+Returns the value of the quantity converted to atomic units as a number type (i.e., with the
+units removed). This is equivalent to `Unitful.ustrip(auconvert(x))`.
+
+# Examples
+
+```jldoctest
+julia> austrip(13.6u"eV")
+0.4997907858599377
+
+julia> austrip(20u"nm")
+377.94522509156565
+```
+"""
+austrip(x::Quantity) = ustrip(auconvert(x))
+austrip(x::Number) = x
+
+# In order to enable precompilation, some things need to be set at runtime
+const localunits = Unitful.basefactors
+function __init__()
+    merge!(Unitful.basefactors, localunits)
+end
+
+# To prevent clashes with the original `Unitful` package, not all units are registered. In
+# order to register units, they are imported into this submodule.
+module RegisteredUnits
+    import Unitful
+    # Import units to be registered
+    import ..UnitfulAtomic: a₀, bohr, Eₕ, hartree, Ry, μ_N
+    # In order to enable precompilation, some things need to be set at runtime
+    const localunits = Unitful.basefactors
+    function __init__()
+        merge!(Unitful.basefactors, localunits)
+        Unitful.register(RegisteredUnits)
+    end
+end
+
+end # module UnitfulAtomic
