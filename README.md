@@ -5,6 +5,7 @@ This package extends [Julia](https://julialang.org)’s
 [atomic units](https://en.wikipedia.org/wiki/Atomic_units).
 
 [![Build Status](https://travis-ci.com/sostock/UnitfulAtomic.jl.svg?branch=master)](https://travis-ci.com/sostock/UnitfulAtomic.jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/v162jvq76dwifxdx/branch/master?svg=true)](https://ci.appveyor.com/project/sostock/unitfulatomic-jl/branch/master)
 
 ## Functions
 
