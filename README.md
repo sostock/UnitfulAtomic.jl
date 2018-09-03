@@ -4,6 +4,8 @@ This package extends [Julia](https://julialang.org)’s
 [Unitful.jl](https://github.com/ajkeller34/Unitful.jl) package to facilitate working with
 [atomic units](https://en.wikipedia.org/wiki/Atomic_units).
 
+[![Build Status](https://travis-ci.com/sostock/UnitfulAtomic.jl.svg?branch=master)](https://travis-ci.com/sostock/UnitfulAtomic.jl)
+
 ## Functions
 
 This package provides three functions that enable easy conversion from and to Hartree atomic
