@@ -32,7 +32,7 @@ install:
 build_script:
   # Need to convert from shallow to complete for Pkg.clone to work
   - IF EXIST .git\shallow (git fetch --unshallow)
-  - C:\projects\julia\bin\julia -e "@static if VERSION >= v\"0.7\"; using InteractiveUtils; end;
+  - C:\projects\julia\bin\julia -e "@static if VERSION >= v\"0.7\"; using InteractiveUtils, Pkg; end;
       versioninfo(); 
       Pkg.clone(pwd(), \"UnitfulAtomic\");
       Pkg.build(\"UnitfulAtomic\")"
