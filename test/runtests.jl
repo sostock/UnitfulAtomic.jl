@@ -11,7 +11,7 @@ baseSIunits = (u"m", u"kg", u"s", u"A", u"K")
 derivedSIunits = (u"Hz", u"N", u"Pa", u"J", u"W", u"C", u"V", u"Ω", u"S", u"F", u"H", u"T", u"Wb",
                   u"Sv", u"J*s", u"J/K", u"kg*m/s", u"N/m^2", u"V/m", u"V*s/m^2", u"C*m^2")
 
-otherunits = (u"μ_N", u"°")
+otherunits = (u"μ_N", u"°", NoUnits)
 
 @testset "aunit" begin
     for u in (baseSIunits..., derivedSIunits..., otherunits...)
@@ -21,7 +21,7 @@ otherunits = (u"μ_N", u"°")
     end
 end
 
-unity = (u"me", u"q", u"ħ", u"1/(4π*ε0)", 1u"a₀", 1u"Eₕ", u"k", 2u"Ry", 2u"μB")
+unity = (1, u"me", u"q", u"ħ", u"1/(4π*ε0)", 1u"a₀", 1u"Eₕ", u"k", 2u"Ry", 2u"μB")
 
 @testset "Atomic units" begin
     for q in unity
@@ -37,6 +37,8 @@ end
         @test auconvert(unit(q), austrip(q)) ≈ q
     end
     for number in (2, 1.5, 3//2, big(π))
+        @test aunit(number) ≡ NoUnits
+        @test auconvert(number) == number
         @test austrip(number) == number
     end
 end

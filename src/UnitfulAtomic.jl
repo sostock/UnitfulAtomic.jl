@@ -88,7 +88,7 @@ julia> auconvert(20u"nm")
 377.94522509156565 a₀
 ```
 """
-auconvert(x::Quantity) = uconvert(aunit(x), x)
+auconvert(x) = uconvert(aunit(x), x)
 
 """
     auconvert(u::Unitful.Units, x::Number)

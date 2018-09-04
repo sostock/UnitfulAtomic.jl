@@ -42,7 +42,7 @@ units:
     5.2917721067e-11 m
     ```
 * `austrip(x::Unitful.Quantity)` converts a quantity to the appropriate atomic unit and then
-  strips the units. This is equivalent to `ustrip(auconvert(x))`:
+  strips the units. This is equivalent to `Unitful.ustrip(auconvert(x))`:
   ```julia
   julia> austrip(13.6u"eV")
   0.4997907858599377
