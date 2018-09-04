@@ -123,8 +123,7 @@ julia> austrip(20u"nm")
 377.94522509156565
 ```
 """
-austrip(x::Quantity) = ustrip(auconvert(x))
-austrip(x::Number) = x
+austrip(x) = ustrip(auconvert(x))
 
 # In order to enable precompilation, some things need to be set at runtime
 const localunits = Unitful.basefactors
