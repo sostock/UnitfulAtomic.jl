@@ -3,27 +3,27 @@ __precompile__()
 module UnitfulAtomic
 
 import Unitful
-using Unitful: @unit, Dimension, Dimensions, NoDims, NoUnits, Quantity, Units, dimension, uconvert, ustrip
+using Unitful: @unit, Dimension, Dimensions, NoDims, NoUnits, Units, dimension, uconvert, ustrip
 
 export auconvert, aunit, austrip
 
 # The following five constants are used as the “base” atomic units
-@unit mₑ  "mₑ"  ElectronRestMass      Unitful.me                    false
-@unit e   "e"   ElementaryCharge      Unitful.q                     false
-@unit ħ   "ħ"   ReducedPlanckConstant Unitful.ħ                     false
-@unit k   "k"   BoltzmannConstant     Unitful.k                     false
-@unit a₀  "a₀"  BohrRadius            5.29_177_210_67e-11*Unitful.m false
+@unit me_au "mₑ"  ElectronRestMass      Unitful.me                    false
+@unit e_au  "e"   ElementaryCharge      Unitful.q                     false
+@unit ħ_au  "ħ"   ReducedPlanckConstant Unitful.ħ                     false
+@unit k_au  "k"   BoltzmannConstant     Unitful.k                     false
+@unit a0_au "a₀"  BohrRadius            5.29_177_210_67e-11*Unitful.m false
 
 # Hartree energy is derived from the base atomic units
-@unit Eₕ  "Eₕ"  HartreeEnergy         1ħ^2/(mₑ*a₀^2)                false
+@unit Eh_au "Eₕ"  HartreeEnergy         1ħ_au^2/(me_au*a0_au^2)       false
 
 # Units that are not Hartree atomic units, but are commonly used in atomic physics
-@unit Ry  "Ry"  RydbergEnergy         Eₕ//2                         false
-@unit μ_N "μ_N" NuclearMagneton       e*ħ/(2*Unitful.mp)            false
+@unit Ry    "Ry"  RydbergEnergy         Eh_au//2                      false
+@unit μ_N   "μ_N" NuclearMagneton       e_au*ħ_au/(2*Unitful.mp)      false
 
 # Aliases for units
-const bohr    = a₀
-const hartree = Eₕ
+const bohr    = a0_au
+const hartree = Eh_au
 
 """
     aunit(x::Unitful.Quantity)
@@ -45,11 +45,11 @@ a₀^-2 e^-1 ħ
 aunit(x) = aunit(dimension(x))
 
 # `aunit` for `Dimension` types
-aunit(x::Dimension{:Length})      = (a₀)^x.power
-aunit(x::Dimension{:Mass})        = (mₑ)^x.power
-aunit(x::Dimension{:Time})        = (ħ/Eₕ)^x.power
-aunit(x::Dimension{:Current})     = (e*Eₕ/ħ)^x.power
-aunit(x::Dimension{:Temperature}) = (Eₕ/k)^x.power
+aunit(x::Dimension{:Length})      = (a0_au)^x.power
+aunit(x::Dimension{:Mass})        = (me_au)^x.power
+aunit(x::Dimension{:Time})        = (ħ_au/Eh_au)^x.power
+aunit(x::Dimension{:Current})     = (e_au*Eh_au/ħ_au)^x.power
+aunit(x::Dimension{:Temperature}) = (Eh_au/k_au)^x.power
 
 # For dimensions not specified above, there is no atomic unit.
 aunit(::Dimension{D}) where D = throw(ArgumentError("no atomic unit defined for dimension $D."))
@@ -69,7 +69,10 @@ aunit(::typeof(NoDims)) = NoUnits
 #   * B-field: ħ/(e*a₀^2)
 #   * Voltage/electric potential: Eₕ/e
 #   * Magnetic dipole moment: e*ħ/mₑ
-for unit in (:(Eₕ), :(ħ/a₀), :(ħ), :(Eₕ/a₀), :(Eₕ/a₀^3), :(Eₕ/(e*a₀)), :(ħ/(e*a₀^2)), :(Eₕ/e), :(e*ħ/mₑ))
+#   * Entropy: k
+for unit in (:(Eh_au), :(ħ_au/a0_au), :(ħ_au), :(Eh_au/a0_au), :(Eh_au/a0_au^3),
+             :(Eh_au/(e_au*a0_au)), :(ħ_au/(e_au*a0_au^2)), :(Eh_au/e_au), :(e_au*ħ_au/me_au),
+             :(k_au))
     @eval aunit(::typeof(dimension($unit))) = $unit
 end
 
@@ -129,20 +132,7 @@ austrip(x) = ustrip(auconvert(x))
 const localunits = Unitful.basefactors
 function __init__()
     merge!(Unitful.basefactors, localunits)
-end
-
-# To prevent clashes with the original `Unitful` package, not all units are registered. In
-# order to register units, they are imported into this submodule.
-module RegisteredUnits
-    import Unitful
-    # Import units to be registered
-    import ..UnitfulAtomic: a₀, bohr, Eₕ, hartree, Ry, μ_N
-    # In order to enable precompilation, some things need to be set at runtime
-    const localunits = Unitful.basefactors
-    function __init__()
-        merge!(Unitful.basefactors, localunits)
-        Unitful.register(RegisteredUnits)
-    end
+    Unitful.register(UnitfulAtomic)
 end
 
 end # module UnitfulAtomic

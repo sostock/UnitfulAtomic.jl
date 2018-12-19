@@ -1,8 +1,7 @@
 # UnitfulAtomic
 
-This package extends [Julia](https://julialang.org)’s
-[Unitful.jl](https://github.com/ajkeller34/Unitful.jl) package to facilitate working with
-[atomic units](https://en.wikipedia.org/wiki/Atomic_units).
+This package extends the [Unitful.jl](https://github.com/ajkeller34/Unitful.jl)
+package to facilitate working with [atomic units](https://en.wikipedia.org/wiki/Atomic_units).
 
 [![Build Status](https://travis-ci.com/sostock/UnitfulAtomic.jl.svg?branch=master)](https://travis-ci.com/sostock/UnitfulAtomic.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/v162jvq76dwifxdx/branch/master?svg=true)](https://ci.appveyor.com/project/sostock/unitfulatomic-jl/branch/master)
@@ -53,40 +52,24 @@ units:
 
 ## Defined units and dimensions
 
-The package defines the following atomic units, from which all other atomic units are
-derived:
+The package defines the following atomic units (prefixed with `_au`), from which all other
+atomic units are derived:
 
-* `mₑ`: the [electron rest mass](https://en.wikipedia.org/wiki/Electron_rest_mass).
-* `e`: the [elementary charge](https://en.wikipedia.org/wiki/Elementary_charge)
-* `ħ`: the [reduced Planck constant](https://en.wikipedia.org/wiki/Planck_constant)
-* `k`: the [Boltzmann constant](https://en.wikipedia.org/wiki/Boltzmann_constant)
-* `a₀`: the [Bohr radius](https://en.wikipedia.org/wiki/Bohr_radius). The alias `bohr` is
-  provided for convenient use without Unicode.
-* `Eₕ`: the [Hartree energy](https://en.wikipedia.org/wiki/Hartree). The alias `hartree` is
-  provided for convenient use without Unicode.
-
-Except for `a₀`/`bohr` and `Eₕ`/`hartree`, these units are not registered in Unitful.jl for
-several reasons:
-
-* The units `ħ` and `k` collide with definitions in the Unitful.jl package, where they are
-  both defined as constants (not units):
-  ```julia
-  julia> u"ħ"
-  1.0545718001391127e-34 J s
-  ```
-* While `mₑ` is not defined in Unitful.jl, `me` is, and both represent the electron rest
-  mass. Therefore, to avoid confusion, `mₑ` is not registered.
-* The symbol `e` is used for Euler’s number in Julia versions < 1.0, where it can also be
-  used with `u"..."`.
-
-Therefore, the units `mₑ`, `e`, `ħ`, and `k` are not registered and cannot be used inside
-the `u"..."` macro. In most cases, this should not pose a problem since the functions
-described above allow converting from and to atomic units without explicitly specifying
-them.
+* `me_au` (printed as `mₑ`): the
+  [electron rest mass](https://en.wikipedia.org/wiki/Electron_rest_mass).
+* `e_au` (printed as `e`): the
+  [elementary charge](https://en.wikipedia.org/wiki/Elementary_charge).
+* `ħ_au` (printed as `ħ`): the
+  [reduced Planck constant](https://en.wikipedia.org/wiki/Planck_constant).
+* `k_au` (printed as `k`): the
+  [Boltzmann constant](https://en.wikipedia.org/wiki/Boltzmann_constant).
+* `a0_au` (printed as `a₀`): the [Bohr radius](https://en.wikipedia.org/wiki/Bohr_radius).
+  The alias `bohr` can be used instead of `a0_au`.
+* `Eh_au` (printed as `Eₕ`): the [Hartree energy](https://en.wikipedia.org/wiki/Hartree).
+  The alias `hartree` can be used instead of `Eh_au`.
 
 Furthermore, this package defines some units that are not atomic units, but are common in
-atomic physics. All of these units are registered, so they can be used with the `u"..."`
-macro:
+atomic physics:
 
 * `Ry`: the Rydberg energy `Ry = h*c*R∞ = Eₕ/2`, see
   [Rydberg constant](https://en.wikipedia.org/wiki/Rydberg_constant).
