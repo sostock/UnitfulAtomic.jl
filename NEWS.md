@@ -2,7 +2,7 @@
 
 ## v0.2.0
 
-* Change names of atomic units to remove name clashes:
+* Change names of atomic units to remove name clashes (**BREAKING**):
   * `mₑ` → `me_au`
   * `e` → `e_au`
   * `ħ` → `ħ_au`
