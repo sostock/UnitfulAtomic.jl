@@ -52,7 +52,7 @@ units:
 
 ## Defined units and dimensions
 
-The package defines the following atomic units (prefixed with `_au`), from which all other
+The package defines the following atomic units (suffixed with `_au`), from which all other
 atomic units are derived:
 
 * `me_au` (printed as `mₑ`): the
