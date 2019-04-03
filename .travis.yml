@@ -14,10 +14,5 @@ julia:
 notifications:
   email: false
 
-after_success:
-  - julia -e '@static if VERSION ≥ v"0.7"; using Pkg; end;
-      cd(Pkg.dir("UnitfulAtomic"));
-      Pkg.add("Coverage");
-      using Coverage;
-      Codecov.submit(process_folder());
-      Coveralls.submit(process_folder())'
+codecov: true
+coveralls: true
