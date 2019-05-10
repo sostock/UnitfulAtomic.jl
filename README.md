@@ -50,7 +50,7 @@ units:
   377.94522509156565
   ```
 
-## Defined units and dimensions
+## Defined units
 
 The package defines the following atomic units (suffixed with `_au`), from which all other
 atomic units are derived:
