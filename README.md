@@ -1,6 +1,6 @@
 # UnitfulAtomic
 
-This package extends the [Unitful.jl](https://github.com/ajkeller34/Unitful.jl)
+This package extends the [Unitful.jl](https://github.com/PainterQubits/Unitful.jl)
 package to facilitate working with [atomic units](https://en.wikipedia.org/wiki/Atomic_units).
 
 [![Build Status](https://travis-ci.com/sostock/UnitfulAtomic.jl.svg?branch=master)](https://travis-ci.com/sostock/UnitfulAtomic.jl)
