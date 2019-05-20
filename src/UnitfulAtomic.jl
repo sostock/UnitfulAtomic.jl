@@ -8,11 +8,11 @@ using Unitful: @unit, Dimension, Dimensions, NoDims, NoUnits, Units, dimension, 
 export auconvert, aunit, austrip
 
 # The following five constants are used as the “base” atomic units
-@unit me_au "mₑ"  ElectronRestMass      Unitful.me                    false
-@unit e_au  "e"   ElementaryCharge      Unitful.q                     false
-@unit ħ_au  "ħ"   ReducedPlanckConstant Unitful.ħ                     false
-@unit k_au  "k"   BoltzmannConstant     Unitful.k                     false
-@unit a0_au "a₀"  BohrRadius            5.29_177_210_67e-11*Unitful.m false
+@unit me_au "mₑ"  ElectronRestMass      Unitful.me                     false
+@unit e_au  "e"   ElementaryCharge      Unitful.q                      false
+@unit ħ_au  "ħ"   ReducedPlanckConstant Unitful.ħ                      false
+@unit k_au  "k"   BoltzmannConstant     Unitful.k                      false
+@unit a0_au "a₀"  BohrRadius            5.291_772_109_03e-11*Unitful.m false # CODATA 2018 recommended value
 
 # Hartree energy is derived from the base atomic units
 @unit Eh_au "Eₕ"  HartreeEnergy         1ħ_au^2/(me_au*a0_au^2)       false

@@ -38,7 +38,7 @@ unity = (1, u"me", u"q", u"ħ", u"1/(4π*ε0)", u"k", 2u"Ry", 2u"μB")
         @test austrip(1u) ≈ 1
         @test auconvert(u, 1) ≈ 1u
     end
-    @test austrip(u"c0") ≈ 137.035_999_173
+    @test austrip(u"c0") ≈ 137.035_999_084
 end
 
 @testset "Aliases" begin
