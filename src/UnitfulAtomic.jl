@@ -70,9 +70,15 @@ aunit(::typeof(NoDims)) = NoUnits
 #   * Voltage/electric potential: Eₕ/e
 #   * Magnetic dipole moment: e*ħ/mₑ
 #   * Entropy: k
+#   * 1st hyperpolarizability: e^3*a₀^3/Eₕ^2
+#   * 2nd hyperpolarizability: e^4*a₀^4/Eₕ^3
+#   * E-field gradient: Eₕ/(e*a₀^2)
+#   * Electric polarizability: e^2*a₀^2/Eₕ
+#   * Permittivity: e^2/(a₀*Eₕ)
 for unit in (:(Eh_au), :(ħ_au/a0_au), :(ħ_au), :(Eh_au/a0_au), :(Eh_au/a0_au^3),
              :(Eh_au/(e_au*a0_au)), :(ħ_au/(e_au*a0_au^2)), :(Eh_au/e_au), :(e_au*ħ_au/me_au),
-             :(k_au))
+             :(k_au), :(e_au^3*a0_au^3/Eh_au^2), :(e_au^4*a0_au^4/Eh_au^3),
+             :(Eh_au/(e_au*a0_au^2)), :(e_au^2*a0_au^2/Eh_au), :(e_au^2/(a0_au*Eh_au)))
     @eval aunit(::typeof(dimension($unit))) = $unit
 end
 
