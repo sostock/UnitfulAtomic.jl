@@ -1,10 +1,6 @@
+using Test
 using Unitful
 using UnitfulAtomic
-@static if VERSION < v"0.7"
-    using Base.Test
-else
-    using Test
-end
 
 siunits = (u"m", u"kg", u"s", u"A", u"K", # base units
            u"Hz", u"N", u"Pa", u"J", u"W", u"C", u"V", u"Ω", u"S", u"F", u"H", u"T", u"Wb", u"Sv",

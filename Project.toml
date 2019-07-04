@@ -1,0 +1,17 @@
+name = "UnitfulAtomic"
+uuid = "a7773ee8-282e-5fa2-be4e-bd808c38a91a"
+authors = ["Sebastian Stock"]
+version = "0.3.0"
+
+[deps]
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+
+[compat]
+Unitful = "≥ 0.16"
+julia = "≥ 0.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
