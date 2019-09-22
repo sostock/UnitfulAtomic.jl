@@ -18,7 +18,7 @@ units:
   ```julia
   julia> aunit(2.3u"cm")
   a₀
-  
+
   julia> aunit(u"T")
   a₀^-2 e^-1 ħ
   ```
@@ -27,7 +27,7 @@ units:
     ```julia
     julia> auconvert(13.6u"eV")
     0.4997907858599377 Eₕ
-    
+
     julia> auconvert(20u"nm")
     377.94522509156565 a₀
     ```
@@ -36,7 +36,7 @@ units:
     ```julia
     julia> auconvert(u"eV", 1)  # convert 1 Eₕ to eV
     27.211386013449417 eV
-    
+
     julia> auconvert(u"m", 1)   # convert 1 a₀ to m
     5.2917721067e-11 m
     ```
@@ -45,7 +45,7 @@ units:
   ```julia
   julia> austrip(13.6u"eV")
   0.4997907858599377
-  
+
   julia> austrip(20u"nm")
   377.94522509156565
   ```
@@ -74,3 +74,4 @@ atomic physics:
 * `Ry`: the Rydberg energy `Ry = h*c*R∞ = Eₕ/2`, see
   [Rydberg constant](https://en.wikipedia.org/wiki/Rydberg_constant).
 * `μ_N`: the [nuclear magneton](https://en.wikipedia.org/wiki/Nuclear_magneton).
+* `angstrom`: see [angstrom](https://en.wikipedia.org/wiki/Angstrom).
