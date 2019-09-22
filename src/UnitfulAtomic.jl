@@ -18,6 +18,7 @@ export auconvert, aunit, austrip
 # Units that are not Hartree atomic units, but are commonly used in atomic physics
 @unit Ry    "Ry"  RydbergEnergy         Eh_au//2                      false
 @unit μ_N   "μ_N" NuclearMagneton       e_au*ħ_au/(2*Unitful.mp)      false
+@unit angstrom "Å" Angstrom             1e-10*Unitful.m               false
 
 # Aliases for units
 const bohr    = a0_au
