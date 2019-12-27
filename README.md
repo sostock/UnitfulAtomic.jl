@@ -20,34 +20,34 @@ units:
   a₀
   
   julia> aunit(u"T")
-  a₀^-2 e^-1 ħ
+  ħ a₀^-2 e^-1
   ```
 * `auconvert` can be used to convert from and to atomic units. It has two methods:
   * `auconvert(x::Unitful.Quantity)` converts a quantity to the appropriate atomic unit:
     ```julia
     julia> auconvert(13.6u"eV")
-    0.4997907858599377 Eₕ
-    
+    0.499790781587053 Eₕ
+
     julia> auconvert(20u"nm")
-    377.94522509156565 a₀
+    377.94522492515404 a₀
     ```
   * `auconvert(u::Unitful.Units, x::Number)` interprets `x` as a quantity in atomic units
     and converts it to the unit `u`:
     ```julia
     julia> auconvert(u"eV", 1)  # convert 1 Eₕ to eV
-    27.211386013449417 eV
-    
+    27.211386246088992 eV
+
     julia> auconvert(u"m", 1)   # convert 1 a₀ to m
-    5.2917721067e-11 m
+    5.29177210903e-11 m
     ```
 * `austrip(x::Unitful.Quantity)` converts a quantity to the appropriate atomic unit and then
   strips the units. This is equivalent to `Unitful.ustrip(auconvert(x))`:
   ```julia
   julia> austrip(13.6u"eV")
-  0.4997907858599377
-  
+  0.499790781587053
+
   julia> austrip(20u"nm")
-  377.94522509156565
+  377.94522492515404
   ```
 
 ## Defined units
