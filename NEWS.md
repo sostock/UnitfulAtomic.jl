@@ -1,5 +1,10 @@
 # UnitfulAtomic release notes
 
+## v1.0.0
+
+* Remove unnecessary code in `__init__()`
+* This release contains no breaking changes
+
 ## v0.3.0
 
 * Update physical constants to CODATA 2018 recommended values (**BREAKING**)
