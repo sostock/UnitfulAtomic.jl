@@ -1,7 +1,7 @@
 name = "UnitfulAtomic"
 uuid = "a7773ee8-282e-5fa2-be4e-bd808c38a91a"
 authors = ["Sebastian Stock"]
-version = "0.3.0"
+version = "1.0.0"
 
 [deps]
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
