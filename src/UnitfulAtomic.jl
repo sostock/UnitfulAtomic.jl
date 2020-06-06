@@ -133,10 +133,6 @@ julia> austrip(20u"nm")
 austrip(x) = ustrip(auconvert(x))
 
 # In order to enable precompilation, some things need to be set at runtime
-const localunits = Unitful.basefactors
-function __init__()
-    merge!(Unitful.basefactors, localunits)
-    Unitful.register(UnitfulAtomic)
-end
+__init__() = Unitful.register(UnitfulAtomic)
 
 end # module UnitfulAtomic
