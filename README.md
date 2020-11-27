@@ -1,13 +1,11 @@
 # UnitfulAtomic
 
+[![PkgEval](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/U/UnitfulAtomic.svg)](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html)
+[![CI](https://github.com/sostock/UnitfulAtomic.jl/workflows/CI/badge.svg)](https://github.com/sostock/UnitfulAtomic.jl/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/sostock/UnitfulAtomic.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sostock/UnitfulAtomic.jl)
+
 This package extends the [Unitful.jl](https://github.com/PainterQubits/Unitful.jl)
 package to facilitate working with [atomic units](https://en.wikipedia.org/wiki/Atomic_units).
-
-[![PkgEval](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/U/UnitfulAtomic.svg)](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html)
-[![Build Status](https://travis-ci.com/sostock/UnitfulAtomic.jl.svg?branch=master)](https://travis-ci.com/sostock/UnitfulAtomic.jl)
-[![Build status](https://ci.appveyor.com/api/projects/status/v162jvq76dwifxdx/branch/master?svg=true)](https://ci.appveyor.com/project/sostock/unitfulatomic-jl/branch/master)
-[![codecov](https://codecov.io/gh/sostock/UnitfulAtomic.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sostock/UnitfulAtomic.jl)
-[![Coverage Status](https://coveralls.io/repos/github/sostock/UnitfulAtomic.jl/badge.svg?branch=master)](https://coveralls.io/github/sostock/UnitfulAtomic.jl?branch=master)
 
 ## Functions
 
