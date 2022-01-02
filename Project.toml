@@ -7,7 +7,7 @@ version = "1.0.0"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
-Unitful = "0.16, 0.17, 0.18, 1"
+Unitful = "1.10"
 julia = "0.7, 1"
 
 [extras]
