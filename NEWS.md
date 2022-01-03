@@ -1,5 +1,10 @@
 # UnitfulAtomic release notes
 
+## master
+
+* Add docstrings for all units ([#8](https://github.com/sostock/UnitfulAtomic.jl/pull/8)).
+* This release requires Julia ≥ 1.0 and Unitful ≥ 1.10 ([#8](https://github.com/sostock/UnitfulAtomic.jl/pull/8)).
+
 ## v1.0.0
 
 * Remove unnecessary code in `__init__()`
